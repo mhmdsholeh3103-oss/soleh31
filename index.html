@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JEPANGKU- Aplikasi Hafalan Bahasa Jepang</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">BANGNYOE31</div>
+    <p>Belajar • Menghafal • Mendengarkan • Berlatih</p>
+</header>
+
+<nav>
+    <button onclick="showPage('home')">🏠 Beranda</button>
+    <button onclick="showPage('vocabulary')">📚 Kosakata</button>
+    <button onclick="showPage('hiragana')">あ Hiragana</button>
+    <button onclick="showPage('katakana')">カ Katakana</button>
+    <button onclick="showPage('kanji')">漢字 Kanji N5</button>
+    <button onclick="showPage('quiz')">📝 Quiz</button>
+    <button onclick="showPage('add')">➕ Tambah</button>
+</nav>
+
+<main>
+
+    <!-- BERANDA -->
+    <section id="home" class="page active">
+
+        <div class="hero">
+            <h1>Selamat Datang di JepangKu 🇯🇵</h1>
+            <p>
+                Aplikasi sederhana untuk membantu menghafal
+                bahasa Jepang secara bertahap.
+            </p>
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <h2>📚 Kosakata</h2>
+                <p>Belajar kosakata berdasarkan Bab 1–25.</p>
+                <button onclick="showPage('vocabulary')">
+                    Mulai Belajar
+                </button>
+            </div>
+
+            <div class="card">
+                <h2>あ Hiragana</h2>
+                <p>Belajar Hiragana dasar, dakuten dan handakuten.</p>
+                <button onclick="showPage('hiragana')">
+                    Belajar Hiragana
+                </button>
+            </div>
+
+            <div class="card">
+                <h2>カ Katakana</h2>
+                <p>Belajar Katakana lengkap dengan romaji.</p>
+                <button onclick="showPage('katakana')">
+                    Belajar Katakana
+                </button>
+            </div>
+
+            <div class="card">
+                <h2>漢字 Kanji N5</h2>
+                <p>Belajar Kanji dasar untuk pemula.</p>
+                <button onclick="showPage('kanji')">
+                    Belajar Kanji
+                </button>
+            </div>
+
+            <div class="card">
+                <h2>📝 Quiz</h2>
+                <p>Uji kemampuan dan lihat nilai di akhir quiz.</p>
+                <button onclick="showPage('quiz')">
+                    Mulai Quiz
+                </button>
+            </div>
+
+        </div>
+
+        <div class="target-box">
+            <h2>🎯 Target Hafalan</h2>
+            <input
+                type="number"
+                id="targetInput"
+                placeholder="Contoh: 20"
+                min="1"
+            >
+            <button onclick="saveTarget()">Simpan Target</button>
+
+            <p id="targetResult"></p>
+        </div>
+
+    </section>
+
+
+    <!-- KOSAKATA -->
+    <section id="vocabulary" class="page">
+
+        <h1>📚 Kosakata Bahasa Jepang</h1>
+
+        <div class="chapter-selector">
+
+            <label>Pilih Bab:</label>
+
+            <select id="chapterSelect" onchange="displayVocabulary()">
+                <option value="1">Bab 1</option>
+                <option value="2">Bab 2</option>
+                <option value="3">Bab 3</option>
+                <option value="4">Bab 4</option>
+                <option value="5">Bab 5</option>
+                <option value="6">Bab 6</option>
+                <option value="7">Bab 7</option>
+                <option value="8">Bab 8</option>
+                <option value="9">Bab 9</option>
+                <option value="10">Bab 10</option>
+                <option value="11">Bab 11</option>
+                <option value="12">Bab 12</option>
+                <option value="13">Bab 13</option>
+                <option value="14">Bab 14</option>
+                <option value="15">Bab 15</option>
+                <option value="16">Bab 16</option>
+                <option value="17">Bab 17</option>
+                <option value="18">Bab 18</option>
+                <option value="19">Bab 19</option>
+                <option value="20">Bab 20</option>
+                <option value="21">Bab 21</option>
+                <option value="22">Bab 22</option>
+                <option value="23">Bab 23</option>
+                <option value="24">Bab 24</option>
+                <option value="25">Bab 25</option>
+            </select>
+
+        </div>
+
+        <div id="vocabularyList" class="vocabulary-grid"></div>
+
+    </section>
+
+
+    <!-- HIRAGANA -->
+    <section id="hiragana" class="page">
+
+        <h1>あ Hafalan Hiragana</h1>
+
+        <p class="description">
+            Hiragana dasar + dakuten + handakuten.
+        </p>
+
+        <div id="hiraganaGrid" class="character-grid"></div>
+
+    </section>
+
+
+    <!-- KATAKANA -->
+    <section id="katakana" class="page">
+
+        <h1>カ Hafalan Katakana</h1>
+
+        <p class="description">
+            Katakana dasar + dakuten + handakuten.
+        </p>
+
+        <div id="katakanaGrid" class="character-grid"></div>
+
+    </section>
+
+
+    <!-- KANJI -->
+    <section id="kanji" class="page">
+
+        <h1>漢字 Kanji N5 Dasar</h1>
+
+        <div id="kanjiGrid" class="kanji-grid"></div>
+
+    </section>
+
+
+    <!-- QUIZ -->
+    <section id="quiz" class="page">
+
+        <h1>📝 Quiz Bahasa Jepang</h1>
+
+        <div class="quiz-box">
+
+            <label>Pilih Bab:</label>
+
+            <select id="quizChapter">
+                <option value="all">Semua Bab</option>
+                <option value="1">Bab 1</option>
+                <option value="2">Bab 2</option>
+                <option value="3">Bab 3</option>
+                <option value="4">Bab 4</option>
+                <option value="5">Bab 5</option>
+            </select>
+
+            <button onclick="startQuiz()">
+                Mulai Quiz
+            </button>
+
+            <div id="quizArea"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- TAMBAH KOSAKATA -->
+    <section id="add" class="page">
+
+        <h1>➕ Tambah Kosakata</h1>
+
+        <div class="form-box">
+
+            <input
+                type="text"
+                id="newJapanese"
+                placeholder="Bahasa Jepang"
+            >
+
+            <input
+                type="text"
+                id="newRomaji"
+                placeholder="Romaji"
+            >
+
+            <input
+                type="text"
+                id="newMeaning"
+                placeholder="Arti Bahasa Indonesia"
+            >
+
+            <input
+                type="number"
+                id="newChapter"
+                placeholder="Bab"
+                min="1"
+                max="25"
+            >
+
+            <button onclick="addVocabulary()">
+                Simpan Kosakata
+            </button>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>🇯🇵 JepangKu — Belajar Bahasa Jepang dengan Menyenangkan</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
